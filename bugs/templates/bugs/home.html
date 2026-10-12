@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BugFlow | Report an Issue</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --navy: #111827;
+        --primary: #6366f1;
+        --primary-hover: #4f46e5;
+        --bg: #f5f7fb;
+        --text: #172033;
+        --muted: #7b8498;
+        --border: #e4e8f0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .topbar {
+        height: 72px;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 7%;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--navy);
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: -0.7px;
+      }
+
+      .brand-icon {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        background: var(--primary);
+        color: white;
+        border-radius: 11px;
+        font-size: 21px;
+      }
+
+      .nav-link {
+        font-size: 12px;
+        font-weight: 600;
+        color: #626c80;
+      }
+
+      .nav-link:hover {
+        color: var(--primary);
+      }
+
+      .page {
+        max-width: 1050px;
+        padding: 48px 24px 65px;
+        margin: auto;
+      }
+
+      .intro {
+        margin-bottom: 28px;
+      }
+
+      .eyebrow {
+        color: var(--primary);
+        text-transform: uppercase;
+        letter-spacing: 1.7px;
+        font-size: 10px;
+        font-weight: 800;
+        margin-bottom: 9px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 37px);
+        line-height: 1.2;
+        letter-spacing: -1.3px;
+        font-weight: 800;
+      }
+
+      .subtitle {
+        margin: 11px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        max-width: 580px;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 270px;
+        gap: 22px;
+        align-items: start;
+      }
+
+      .form-card,
+      .side-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 8px 30px #18244306;
+      }
+
+      .form-header {
+        padding: 23px 26px;
+        border-bottom: 1px solid #edf0f5;
+      }
+
+      .form-header h2 {
+        margin: 0;
+        font-size: 16px;
+        letter-spacing: -0.3px;
+      }
+
+      .form-header p {
+        margin: 5px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .form-body {
+        padding: 26px;
+      }
+
+      .field {
+        margin-bottom: 22px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 12px;
+        font-weight: 700;
+        color: #293347;
+      }
+
+      .required {
+        color: #e04458;
+      }
+
+      .optional {
+        color: #98a1b1;
+        font-weight: 500;
+        margin-left: 4px;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        display: block;
+        border: 1px solid #dfe4ed;
+        border-radius: 9px;
+        background: #fcfdff;
+        color: var(--text);
+        padding: 12px 14px;
+        font-family: inherit;
+        font-size: 12px;
+        outline: none;
+        transition:
+          border 0.2s,
+          box-shadow 0.2s,
+          background 0.2s;
+      }
+
+      input {
+        height: 46px;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 145px;
+        line-height: 1.7;
+      }
+
+      #stack_trace {
+        min-height: 100px;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #a1a9b8;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: var(--primary);
+        background: white;
+        box-shadow: 0 0 0 4px #6366f117;
+      }
+
+      .hint {
+        color: #8992a4;
+        font-size: 10px;
+        margin-top: 7px;
+      }
+
+      .form-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding-top: 6px;
+      }
+
+      .privacy-note {
+        font-size: 10px;
+        color: var(--muted);
+      }
+
+      .submit-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-height: 45px;
+        padding: 0 19px;
+        border: 0;
+        border-radius: 9px;
+        background: var(--primary);
+        color: white;
+        font-family: inherit;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 5px 13px #6366f126;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+
+      .submit-btn:hover {
+        background: var(--primary-hover);
+        transform: translateY(-1px);
+      }
+
+      .side-card {
+        padding: 22px;
+      }
+
+      .side-icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: #eef2ff;
+        color: var(--primary);
+        font-size: 21px;
+        margin-bottom: 17px;
+      }
+
+      .side-card h3 {
+        font-size: 14px;
+        margin: 0 0 7px;
+      }
+
+      .side-card > p {
+        color: var(--muted);
+        font-size: 11px;
+        margin: 0;
+        line-height: 1.8;
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 22px 0;
+      }
+
+      .tip {
+        display: flex;
+        gap: 11px;
+        align-items: flex-start;
+        margin-top: 18px;
+      }
+
+      .tip-number {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        background: #f0f1ff;
+        color: #5558d9;
+        border-radius: 8px;
+        font-size: 10px;
+        font-weight: 800;
+      }
+
+      .tip strong {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 3px;
+      }
+
+      .tip span {
+        display: block;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.6;
+      }
+
+      .footer {
+        margin-top: 30px;
+        text-align: center;
+        color: #939bad;
+        font-size: 10px;
+      }
+
+      @media (max-width: 760px) {
+        .topbar {
+          padding: 0 20px;
+        }
+        .page {
+          padding: 32px 16px 45px;
+        }
+        .layout {
+          grid-template-columns: 1fr;
+        }
+        .side-card {
+          order: 2;
+        }
+      }
+
+      @media (max-width: 460px) {
+        .form-body {
+          padding: 20px 17px;
+        }
+        .form-header {
+          padding: 20px 17px;
+        }
+        .form-actions {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .submit-btn {
+          width: 100%;
+        }
+        .privacy-note {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="topbar">
+      <a href="/dashboard/" class="brand">
+        <span class="brand-icon">⌘</span>
+        <span>BugFlow<span style="color: #6366f1">.</span></span>
+      </a>
+
+      <a href="/dashboard/" class="nav-link">← Back to dashboard</a>
+    </header>
+
+    <main class="page">
+      <section class="intro">
+        <div class="eyebrow">Issue reporting</div>
+        <h1>Report a bug<span style="color: #6366f1">.</span></h1>
+        <p class="subtitle">
+          Help your team identify and resolve software issues. Add clear details
+          so the triage system can assess your report.
+        </p>
+      </section>
+
+      <div class="layout">
+        <section class="form-card">
+          <div class="form-header">
+            <h2>Bug report details</h2>
+            <p>
+              Fields marked with <span class="required">*</span> are required.
+            </p>
+          </div>
+
+          <form method="post" class="form-body">
+            {% csrf_token %}
+
+            <div class="field">
+              <label for="title"
+                >Bug title <span class="required">*</span></label
+              >
+              <input
+                type="text"
+                id="title"
+                name="title"
+                maxlength="200"
+                placeholder="e.g. Login button is not working"
+                required
+              />
+              <div class="hint">
+                Write a short, specific summary of the issue.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="description"
+                >Description <span class="required">*</span></label
+              >
+              <textarea
+                id="description"
+                name="description"
+                placeholder="What happened? What did you expect to happen? Include the steps to reproduce the issue."
+                required
+              ></textarea>
+              <div class="hint">
+                Include the expected behaviour and the actual result.
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="stack_trace">
+                Stack trace <span class="optional">(Optional)</span>
+              </label>
+              <textarea
+                id="stack_trace"
+                name="stack_trace"
+                placeholder="Paste any relevant error message or stack trace here..."
+              ></textarea>
+              <div class="hint">
+                Remove passwords, API keys or other secrets before submitting.
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <span class="privacy-note"
+                >✦ Severity is predicted automatically.</span
+              >
+              <button type="submit" class="submit-btn">
+                Submit bug report <span style="font-size: 17px">→</span>
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <aside class="side-card">
+          <div class="side-icon">✧</div>
+          <h3>Help us triage faster</h3>
+          <p>
+            A detailed report makes it easier to understand, classify and
+            prioritise the issue.
+          </p>
+
+          <div class="divider"></div>
+
+          <div class="tip">
+            <div class="tip-number">01</div>
+            <div>
+              <strong>Use a clear title</strong>
+              <span>Describe the exact feature or action that failed.</span>
+            </div>
+          </div>
+
+          <div class="tip">
+            <div class="tip-number">02</div>
+            <div>
+              <strong>Explain the steps</strong>
+              <span>Tell us what you did and what went wrong.</span>
+            </div>
+          </div>
+
+          <div class="tip">
+            <div class="tip-number">03</div>
+            <div>
+              <strong>Add error details</strong>
+              <span>Include relevant error messages when available.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="footer">BugFlow · Automated Software Bug Triage</footer>
+    </main>
+  </body>
+</html>
